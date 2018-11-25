@@ -47,9 +47,9 @@ namespace engine.Common.Entities
         {
             if (item is Ammo)
             {
-                if (Primary != null && Primary is Gun)
+                if (Primary != null && Primary is RangeWeapon)
                 {
-                    var gun = (Primary as Gun);
+                    var gun = (Primary as RangeWeapon);
                     gun.AddAmmo((int)item.Health);
                     return true;
                 }
@@ -106,9 +106,9 @@ namespace engine.Common.Entities
             // check if we have a primary weapon
             if (Primary == null) return AttackStateEnum.Melee;
 
-            if (Primary is Gun)
+            if (Primary is RangeWeapon)
             {
-                var gun = (Primary as Gun);
+                var gun = (Primary as RangeWeapon);
 
                 // check if there is a round in the clip
                 int rounds;
@@ -133,9 +133,9 @@ namespace engine.Common.Entities
         {
             if (Primary == null) return AttackStateEnum.None;
 
-            if (Primary is Gun)
+            if (Primary is RangeWeapon)
             {
-                var gun = (Primary as Gun);
+                var gun = (Primary as RangeWeapon);
 
                 // check if we have a primary weapon
                 if (!gun.HasAmmo()) return AttackStateEnum.NoRounds;

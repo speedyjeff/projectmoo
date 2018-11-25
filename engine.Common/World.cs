@@ -729,7 +729,7 @@ namespace engine.Common
             switch (state)
             {
                 case AttackStateEnum.Reloaded:
-                    if (player.Primary is Gun) Sounds.Play((player.Primary as Gun).ReloadSoundPath());
+                    if (player.Primary is RangeWeapon) Sounds.Play((player.Primary as RangeWeapon).ReloadSoundPath());
                     else throw new Exception("Invalid action for a non-gun");
                     break;
                 case AttackStateEnum.None:
@@ -761,12 +761,12 @@ namespace engine.Common
                 case AttackStateEnum.FiredWithContact:
                 case AttackStateEnum.FiredAndKilled:
                 case AttackStateEnum.Fired:
-                    if (player.Primary is Gun) Sounds.Play((player.Primary as Gun).FiredSoundPath());
+                    if (player.Primary is RangeWeapon) Sounds.Play((player.Primary as RangeWeapon).FiredSoundPath());
                     else throw new Exception("Invalid action for a non-gun");
                     break;
                 case AttackStateEnum.NoRounds:
                 case AttackStateEnum.NeedsReload:
-                    if (player.Primary is Gun) Sounds.Play((player.Primary as Gun).EmptySoundPath());
+                    if (player.Primary is RangeWeapon) Sounds.Play((player.Primary as RangeWeapon).EmptySoundPath());
                     else throw new Exception("Invalid action for a non-gun");
                     break;
                 case AttackStateEnum.LoadingRound:

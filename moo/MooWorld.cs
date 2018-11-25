@@ -195,6 +195,28 @@ namespace moo
 
                     return true;
 
+                case '7':
+                    // craft bow
+
+                    // check if there is enough wood materials
+                    if (mp.Rock < MooBow.RockCraftCost ||
+                        mp.Wood < MooBow.WoodCraftCost) return false;
+
+                    // use wood and rock to craft a bow
+                    mp.Rock -= MooBow.RockCraftCost;
+                    mp.Wood -= MooBow.WoodCraftCost;
+
+                    // if there is room in the hand (put in hand)
+                    //  else drop on the ground
+                    var bow = new MooBow() { X = player.X, Y = player.Y };
+
+                    if (!player.Take(bow))
+                    {
+                        World.AddItem(bow);
+                    }
+
+                    return true;
+
                 case '8':
                     // craft sword
 

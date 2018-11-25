@@ -43,14 +43,16 @@ namespace moo
                 // crafting menu
                 g.Text(RGBA.Black, left + 250 + 130, top, "Crafting Menu", 16);
                 top += 20;
-                g.Text(RGBA.Black, left + 250 + 140, top, "[3] Wood Box (10 wood)", 12);
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[3] Wood Box ({0} wood)", MooWoodBox.CraftCost), 12);
                 top += 20;
-                g.Text(RGBA.Black, left + 250 + 140, top, "[4] Rock Box (10 rock)", 12);
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[4] Rock Box ({0} rock)", MooRockBox.CraftCost), 12);
                 top += 20;
-                g.Text(RGBA.Black, left + 250 + 140, top, "[8] Sword (100 wood, 150 rock)", 12);
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[7] bow ({0} wood, {1} rock)", MooBow.WoodCraftCost, MooBow.RockCraftCost), 12);
+                top += 20;
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[8] Sword ({0} wood, {1} rock)", MooSword.WoodCraftCost, MooSword.RockCraftCost), 12);
                 top += 40;
                 g.Text(new RGBA() { R = 0, G = 127, B = 64, A = 255 }, left + 250 + 140, top, "[9] Zombies", 12);
-                top += 50;
+                top += 30;
                 g.Text(RGBA.Black, left, top, "[esc] to start");
             }
             g.EnableTranslation();

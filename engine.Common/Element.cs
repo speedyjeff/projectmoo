@@ -44,6 +44,8 @@ namespace engine.Common.Entities
 
         public bool IsDead => (TakesDamage ? Health <= 0 : false);
 
+        public virtual string ImagePath => "";
+
         public Element()
         {
             Id = GetNextId();

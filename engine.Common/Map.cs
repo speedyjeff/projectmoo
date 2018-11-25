@@ -144,7 +144,7 @@ namespace engine.Common
 
             var hit = new HashSet<Element>();
             var state = AttackStateEnum.None;
-            var trajectories = new List<BulletTrajectory>();
+            var trajectories = new List<ShotTrajectory>();
 
             lock (this)
             {
@@ -154,8 +154,8 @@ namespace engine.Common
                 if (state == AttackStateEnum.Fired)
                 {
 
-                    if (!(player.Primary is Gun)) throw new Exception("Must have a Gun to fire");
-                    var gun = player.Primary as Gun;
+                    if (!(player.Primary is RangeWeapon)) throw new Exception("Must have a Gun to fire");
+                    var gun = player.Primary as RangeWeapon;
                     Element elem = null;
 
                     // apply the bullet via the trajectory
@@ -174,8 +174,11 @@ namespace engine.Common
                     // project out a short range and check if there was contact
                     Element elem = null;
 
+                    // use either fists, or if the Primary provides damage
+                    Tool weapon = (player.Primary != null && player.Primary is Tool) ? player.Primary as Tool : player.Fists;
+
                     // apply the bullet via the trajectory
-                    elem = TrackAttackTrajectory(player, player.Fists, player.X, player.Y, player.Angle, trajectories);
+                    elem = TrackAttackTrajectory(player, weapon, player.X, player.Y, player.Angle, trajectories);
                     if (elem != null) hit.Add(elem);
 
                     // disregard any trajectories
@@ -457,7 +460,7 @@ namespace engine.Common
             return item;
         }
 
-        private Element TrackAttackTrajectory(Player player, Tool weapon, float x, float y, float angle, List<BulletTrajectory> trajectories)
+        private Element TrackAttackTrajectory(Player player, Tool weapon, float x, float y, float angle, List<ShotTrajectory> trajectories)
         {
             float x1, y1, x2, y2;
             Collision.CalculateLineByAngle(x, y, angle, weapon.Distance, out x1, out y1, out x2, out y2);
@@ -479,7 +482,7 @@ namespace engine.Common
             }
 
             // add bullet effect
-            trajectories.Add( new BulletTrajectory()
+            trajectories.Add( new ShotTrajectory()
                 {
                     X1 = x1,
                     Y1 = y1,

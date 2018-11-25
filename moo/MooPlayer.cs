@@ -37,10 +37,14 @@ namespace moo
             Collision.CalculateLineByAngle(X, Y, Angle, Width / 2, out x1, out y1, out x2, out y2);
 
             // draw what is in their hand
-            if (Primary != null && Primary is MooObject)
+            var loaded = 0f;
+            if (Primary != null && !string.IsNullOrWhiteSpace(Primary.ImagePath))
             {
-                var obj = Primary as MooObject;
-                g.Image(obj.ImagePath, x2, y2, obj.Width, obj.Height);
+                g.Image(Primary.ImagePath, x2, y2, Primary.Width, Primary.Height);
+                if (Primary is RangeWeapon)
+                {
+                    loaded = (Primary as RangeWeapon).PercentReloaded();
+                }
             }
 
             // draw body
@@ -48,6 +52,13 @@ namespace moo
 
             // draw a fist
             g.Ellipse(Color, x2, y2, Width / 3, Width / 3);
+
+            // if the weapon is loading, draw a progress bar
+            if (loaded > 0 && loaded < 1)
+            {
+                g.Rectangle(new RGBA() { R = 0, G = 0, B = 255, A = 200 }, X + (Width / 2), Y + (Height / 2), (Width / 2) * loaded, Height / 4, true);
+                g.Rectangle(RGBA.Black, X + (Width / 2), Y + (Height / 2), Width / 2, Height / 4, false);
+            }
 
             base.Draw(g);
         }

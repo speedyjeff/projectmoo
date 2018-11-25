@@ -55,6 +55,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="MooAxe.cs" />
     <Compile Include="MooBackground.cs" />
+    <Compile Include="MooBow.cs" />
     <Compile Include="MooCraftable.cs" />
     <Compile Include="MooFood.cs" />
     <Compile Include="MooObject.cs" />
@@ -109,6 +110,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="media\axe.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="media\bow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="media\bow.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="media\emptybow.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="media\food.png">

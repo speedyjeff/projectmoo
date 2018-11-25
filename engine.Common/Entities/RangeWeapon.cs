@@ -5,7 +5,7 @@ using System.Text;
 
 namespace engine.Common.Entities
 {
-    public class Gun : Tool
+    public class RangeWeapon : Tool
     {
         // ammo
         public int Ammo { get; private set; }
@@ -15,14 +15,19 @@ namespace engine.Common.Entities
         public virtual string EmptySoundPath() => "media/empty.wav";
         public virtual string ReloadSoundPath() => "media/reload.wav";
         public virtual string FiredSoundPath() => "";
-        public virtual string ImagePath => "";
 
-        public Gun() : base()
+        public RangeWeapon() : base()
         {
             CanAcquire = true;
             IsSolid = false;
             Shotdelay = new Stopwatch();
             ResetShotdelay();
+        }
+
+        public override void Draw(IGraphics g)
+        {
+            g.Image(ImagePath, X - Width / 2, Y - Height / 2, Width, Height);
+            base.Draw(g);
         }
 
         public bool HasAmmo()
@@ -43,7 +48,6 @@ namespace engine.Common.Entities
             ClipCapacity += capacity;
             if (ClipCapacity <= 0) throw new Exception("Must have a positive clip capacity");
         }
-
 
         // returns true if full
         public bool RoundsInClip(out int rounds)
@@ -83,6 +87,13 @@ namespace engine.Common.Entities
             return true;
         }
 
+        public float PercentReloaded()
+        {
+            // 100%
+            if (Shotdelay.ElapsedMilliseconds > Delay) return 1.0f;
+            return (float)Shotdelay.ElapsedMilliseconds / (float)Delay;
+        }
+
         #region private
         private Stopwatch Shotdelay;
 
@@ -94,12 +105,6 @@ namespace engine.Common.Entities
         private bool CheckShotdelay()
         {
             return (Shotdelay.ElapsedMilliseconds > Delay);
-        }
-
-        public override void Draw(IGraphics g)
-        {
-            g.Image(ImagePath, X - Width / 2, Y - Height / 2);
-            base.Draw(g);
         }
         #endregion
     }

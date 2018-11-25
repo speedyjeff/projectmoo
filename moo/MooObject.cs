@@ -17,8 +17,6 @@ namespace moo
             CanAcquire = true;
         }
 
-        public virtual string ImagePath => @"";
-
         public override void Draw(IGraphics g)
         {
             if (CanAcquire)

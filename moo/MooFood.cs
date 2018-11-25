@@ -19,6 +19,6 @@ namespace moo
         public const int HealthPerFood = 1;
         public const float Gathered = 1;
 
-        public override string ItemImagePath => @"media\food.png";
+        public override string ImagePath => @"media\food.png";
     }
 }

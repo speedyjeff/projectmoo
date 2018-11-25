@@ -50,23 +50,26 @@ namespace moo
             var ybox = g.Height - 95;
 
             // display what is in the hand
-            if (Me.Primary != null && Me.Primary is MooObject)
+            var rounds = -1;
+            if (Me.Primary != null && !string.IsNullOrWhiteSpace(Me.Primary.ImagePath))
             {
                 // put the axe in the first box
-                var obj = Me.Primary as MooObject;
-                g.Image(obj.ImagePath, xbox, ybox, wbox, hbox);
+                g.Image(Me.Primary.ImagePath, xbox, ybox, wbox, hbox);
+                if (Me.Primary is RangeWeapon) rounds = (Me.Primary as RangeWeapon).Clip;
             }
             g.Rectangle(RGBA.Black, xbox, ybox, wbox, hbox, false);
+            if (rounds > 0) g.Text(RGBA.White, xbox + (wbox / 3), ybox, rounds.ToString(), 16);
             // others
             for (int i = 0; i < Me.HandCapacity; i++)
             {
-                if (Me.Secondary[i] != null && Me.Secondary[i] is MooObject)
+                rounds = -1;
+                if (Me.Secondary[i] != null && !string.IsNullOrWhiteSpace(Me.Secondary[i].ImagePath))
                 {
-                    // put the axe in the first box
-                    var obj = Me.Secondary[i] as MooObject;
-                    g.Image(obj.ImagePath, xbox + (wbox * (i+1)), ybox, wbox, hbox);
+                    g.Image(Me.Secondary[i].ImagePath, xbox + (wbox * (i+1)), ybox, wbox, hbox);
+                    if (Me.Secondary[i] is RangeWeapon) rounds = (Me.Secondary[i] as RangeWeapon).Clip;
                 }
                 g.Rectangle(RGBA.Black, xbox + (wbox * (i+1)), ybox, wbox, hbox, false);
+                if (rounds > 0) g.Text(RGBA.White, xbox + (wbox * (i + 1)) + (wbox / 3), ybox, rounds.ToString(), 16);
             }
 
             base.Draw(g);

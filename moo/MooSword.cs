@@ -14,7 +14,8 @@ namespace moo
         public MooSword()
         {
             Name = "MooSword";
-            Damage = 10;
+            Damage = 15;
+            Distance = (int)(Width*2);
         }
 
         public override string ImagePath => @"media\sword.png";

@@ -14,7 +14,8 @@ namespace moo
         public MooAxe()
         {
             Name = "MooAxe";
-            Damage = 2; 
+            Damage = 5;
+            Distance = (int)(Width);
         }
 
         public override string ImagePath => @"media\axe.png";

@@ -48,9 +48,9 @@
     <Compile Include="Entities\Background.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Entities\Health.cs" />
-    <Compile Include="Entities\BulletTrajectory.cs" />
+    <Compile Include="Entities\ShotTrajectory.cs" />
     <Compile Include="Entities\EphemerialElement.cs" />
-    <Compile Include="Entities\Gun.cs" />
+    <Compile Include="Entities\RangeWeapon.cs" />
     <Compile Include="Entities\Shield.cs" />
     <Compile Include="Entities\Menu.cs" />
     <Compile Include="Entities\OnScreenText.cs" />
