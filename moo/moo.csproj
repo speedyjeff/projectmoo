@@ -71,7 +71,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MooWall.cs" />
     <Compile Include="MooStartMenu.cs" />
-    <Compile Include="Zombie\MooZombie.cs" />
+    <Compile Include="MooZombie.cs" />
     <EmbeddedResource Include="moo.resx">
       <DependentUpon>moo.cs</DependentUpon>
     </EmbeddedResource>
