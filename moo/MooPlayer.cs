@@ -20,9 +20,9 @@ namespace moo
             Take(new MooAxe());
         }
 
-        public int Wood { get; set; }
-        public int Food { get; set; }
-        public int Rock { get; set; }
+        public float Wood { get; set; }
+        public float Food { get; set; }
+        public float Rock { get; set; }
         public int XP { get; set; }
 
         public int Level { get; set; }

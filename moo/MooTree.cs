@@ -16,6 +16,8 @@ namespace moo
             Name = "MooTree";
         }
 
+        public const float Gathered = 1;
+
         public override string ItemImagePath => @"media\tree.png";
     }
 }

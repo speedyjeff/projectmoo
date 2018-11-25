@@ -16,6 +16,8 @@ namespace moo
             Name = "MooRock";
         }
 
+        public const float Gathered = 0.25f;
+
         public override string ItemImagePath => @"media\rock.png";
     }
 }

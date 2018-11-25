@@ -286,15 +286,15 @@ namespace moo
                 }
                 else if (element is MooTree)
                 {
-                    mp.Wood += resources;
+                    mp.Wood += (MooTree.Gathered * resources);
                 }
                 else if (element is MooFood)
                 {
-                    mp.Food += resources;
+                    mp.Food += (MooFood.Gathered * resources);
                 }
                 else if (element is MooRock)
                 {
-                    mp.Rock += resources;
+                    mp.Rock += (MooRock.Gathered * resources);
                 }
                 else
                 {
@@ -305,8 +305,15 @@ namespace moo
                 if (mp.XP > mp.XPMax)
                 {
                     mp.Level++;
-                    mp.XPMax += MooPlayer.XPIncrease;
+                    // keep level progression constant
+                    //mp.XPMax += MooPlayer.XPIncrease;
                     mp.XP = 0;
+
+                    // ever 3rd level, spawn zombies
+                    if (mp.Level % 3 == 0)
+                    {
+                        TakeAction(mp, '9' /* spawn zombies*/);
+                    }
                 }
             }
         }

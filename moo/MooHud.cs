@@ -20,13 +20,13 @@ namespace moo
         {
             // resources
             g.Rectangle(RGBA.Black, g.Width - 100, g.Height - 75, 100, 20, false);
-            g.Text(RGBA.Black, g.Width - 100, g.Height - 71, "Wood " + Me.Wood, 8);
+            g.Text(RGBA.Black, g.Width - 100, g.Height - 71, "Wood " + Me.Wood.ToString("f1"), 8);
 
             g.Rectangle(RGBA.Black, g.Width - 100, g.Height - 95, 100, 20, false);
-            g.Text(RGBA.Black, g.Width - 100, g.Height - 91, "Rock " + Me.Rock, 8);
+            g.Text(RGBA.Black, g.Width - 100, g.Height - 91, "Rock " + Me.Rock.ToString("f1"), 8);
 
             g.Rectangle(RGBA.Black, g.Width - 100, g.Height - 115, 100, 20, false);
-            g.Text(RGBA.Black, g.Width - 100, g.Height - 111, "Food " + Me.Food, 8);
+            g.Text(RGBA.Black, g.Width - 100, g.Height - 111, "Food " + Me.Food.ToString("f1"), 8);
 
             // xp
             var wxp = 300;
