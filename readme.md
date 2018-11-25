@@ -8,4 +8,4 @@ The project uses C# and a WinForms shell.  This project has an updated game engi
 
 ![game play](https://github.com/speedyjeff/projectmoo/blob/master/moo/media/gameplay.png)
 
-![more game play](https://github.com/speedyjeff/projectmoo/blob/moo/master/media/gameplay2.png)
+![more game play](https://github.com/speedyjeff/projectmoo/blob/master/moo/media/gameplay2.png)
