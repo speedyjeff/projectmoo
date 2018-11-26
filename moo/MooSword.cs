@@ -14,7 +14,7 @@ namespace moo
         public MooSword()
         {
             Name = "MooSword";
-            Damage = 15;
+            Damage = 10;
             Distance = (int)(Width*2);
         }
 
@@ -22,5 +22,6 @@ namespace moo
 
         public const int WoodCraftCost = 100;
         public const int RockCraftCost = 150;
+        public const int LevelCraftCost = 15;
     }
 }

@@ -43,16 +43,18 @@ namespace moo
                 // crafting menu
                 g.Text(RGBA.Black, left + 250 + 130, top, "Crafting Menu", 16);
                 top += 20;
-                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[3] Wood Box ({0} wood)", MooWoodBox.CraftCost), 12);
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[3] Wood Box ({0} wood, {1} level)", MooWoodBox.WoodCraftCost, MooWoodBox.LevelCraftCost), 8);
                 top += 20;
-                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[4] Rock Box ({0} rock)", MooRockBox.CraftCost), 12);
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[4] Rock Box ({0} rock, {1} level)", MooRockBox.RockCraftCost, MooRockBox.LeelCraftCost), 8);
                 top += 20;
-                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[7] bow ({0} wood, {1} rock)", MooBow.WoodCraftCost, MooBow.RockCraftCost), 12);
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[7] bow ({0} wood, {1} rock, {2} level)", MooBow.WoodCraftCost, MooBow.RockCraftCost, MooBow.LevelCraftCost), 8);
                 top += 20;
-                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[8] Sword ({0} wood, {1} rock)", MooSword.WoodCraftCost, MooSword.RockCraftCost), 12);
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("    or arrows ({0} wood)", MooBow.WoodCraftCost), 8);
+                top += 20;
+                g.Text(RGBA.Black, left + 250 + 140, top, string.Format("[8] Sword ({0} wood, {1} rock, {2} level)", MooSword.WoodCraftCost, MooSword.RockCraftCost, MooSword.LevelCraftCost), 8);
                 top += 40;
                 g.Text(new RGBA() { R = 0, G = 127, B = 64, A = 255 }, left + 250 + 140, top, "[9] Zombies", 12);
-                top += 30;
+                top += 10;
                 g.Text(RGBA.Black, left, top, "[esc] to start");
             }
             g.EnableTranslation();

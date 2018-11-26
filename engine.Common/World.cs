@@ -440,6 +440,12 @@ namespace engine.Common
             else throw new Exception("Invalid item to remove");
         }
 
+        public void Play(string path)
+        {
+            // play sound
+            Sounds.Play(path);
+        }
+
         #region private
         class PlayerDetails
         {

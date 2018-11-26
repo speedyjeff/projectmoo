@@ -121,6 +121,9 @@
     <Content Include="media\emptybow.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="media\failed.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="media\food.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -9,7 +9,7 @@ using engine.Common.Entities;
 
 namespace moo
 {
-    enum AreaType : byte { Blank = 0, Food = 1, Gold = 2, Tree = 3, Rock = 4, Player = 5, Sword = 6};
+    enum AreaType : byte { Blank = 0, Food = 1, Gold = 2, Tree = 3, Rock = 4, Player = 5, Sword = 6, Bow = 7};
 
     class MooWorld
     {
@@ -75,9 +75,10 @@ namespace moo
                 int index = 0;
                 // players
                 board[index++] = AreaType.Player;
-                for (int i = 0; i < 2; i++) board[index++] = AreaType.Sword;
+                for (int i = 0; i < 1; i++) board[index++] = AreaType.Sword;
+                for (int i = 0; i < 1; i++) board[index++] = AreaType.Bow;
                 // gold
-                for(int i=0; i<(count * 0.01); i++) board[index++] = AreaType.Gold;
+                for (int i=0; i<(count * 0.01); i++) board[index++] = AreaType.Gold;
                 // Tree
                 for (int i = 0; i < (count * 0.05); i++) board[index++] = AreaType.Tree;
                 // rock
@@ -135,6 +136,10 @@ namespace moo
                     {
                         items.Add(new MooSword() { X = x, Y = y });
                     }
+                    else if (board[i] == AreaType.Bow)
+                    {
+                        items.Add(new MooBow() { X = x, Y = y });
+                    }
                 }
 
                 // make borders
@@ -159,14 +164,18 @@ namespace moo
                     // craft wood block
 
                     // check if there is enough wood materials
-                    if (mp.Wood < MooWoodBox.CraftCost) return false;
+                    if (mp.Wood < MooWoodBox.WoodCraftCost 
+                        || mp.Level < MooWoodBox.LevelCraftCost) return FailedToCraft();
 
                     // use wood to craft a box
-                    mp.Wood -= MooWoodBox.CraftCost;
+                    mp.Wood -= MooWoodBox.WoodCraftCost;
 
                     // if there is room in the hand (put in hand)
                     //  else drop on the ground
                     var wood = new MooWoodBox() { X = player.X, Y = player.Y };
+                    // the health of this box increases with level
+                    if (mp.Level > MooPlayer.MaxLevel) wood.Health += wood.Health;
+                    else wood.Health += wood.Health * ((float)mp.Level / (float)MooPlayer.MaxLevel);
 
                     if (!player.Take(wood))
                     {
@@ -179,14 +188,18 @@ namespace moo
                     // craft rock block
 
                     // check if there is enough wood materials
-                    if (mp.Rock < MooRockBox.CraftCost) return false;
+                    if (mp.Rock < MooRockBox.RockCraftCost
+                        || mp.Level < MooRockBox.LeelCraftCost) return FailedToCraft();
 
                     // use rock to craft a box
-                    mp.Rock -= MooRockBox.CraftCost;
+                    mp.Rock -= MooRockBox.RockCraftCost;
 
                     // if there is room in the hand (put in hand)
                     //  else drop on the ground
                     var rock = new MooRockBox() { X = player.X, Y = player.Y };
+                    // the health of this box increases with level
+                    if (mp.Level > MooPlayer.MaxLevel) rock.Health *= rock.Health;
+                    else rock.Health *= rock.Health * ((float)mp.Level / (float)MooPlayer.MaxLevel);
 
                     if (!player.Take(rock))
                     {
@@ -196,11 +209,25 @@ namespace moo
                     return true;
 
                 case '7':
-                    // craft bow
+                    // craft bow or arrows
+
+                    if (mp.Primary is MooBow)
+                    {
+                        if (mp.Wood < MooBow.WoodCraftCost) return FailedToCraft();
+
+                        // add arrows
+                        mp.Wood -= MooBow.WoodCraftCost;
+
+                        (mp.Primary as MooBow).AddAmmo(MooBow.ArrowChunk);
+                        (mp.Primary as MooBow).Reload();
+
+                        return true;
+                    }
 
                     // check if there is enough wood materials
                     if (mp.Rock < MooBow.RockCraftCost ||
-                        mp.Wood < MooBow.WoodCraftCost) return false;
+                        mp.Wood < MooBow.WoodCraftCost ||
+                        mp.Level < MooBow.LevelCraftCost) return FailedToCraft();
 
                     // use wood and rock to craft a bow
                     mp.Rock -= MooBow.RockCraftCost;
@@ -222,7 +249,8 @@ namespace moo
 
                     // check if there is enough wood materials
                     if (mp.Rock < MooSword.RockCraftCost ||
-                        mp.Wood < MooSword.WoodCraftCost) return false;
+                        mp.Wood < MooSword.WoodCraftCost ||
+                        mp.Level < MooSword.LevelCraftCost) return FailedToCraft();
 
                     // use wood and rock to craft a sword
                     mp.Rock -= MooSword.RockCraftCost;
@@ -255,15 +283,36 @@ namespace moo
 
                 case '9':
                     var rand = new Random();
+                    var horde = MooZombie.HordeSize + ((MooZombie.HordeSize * MooZombie.HordeSize) * ((float)mp.Level / (float)MooPlayer.MaxLevel));
+
+                    // only add so many zombies
+                    var current = World.Alive;
+                    var maxhorde = 300;
+
+                    if (current > maxhorde) return true;
+                    if (current + horde > maxhorde) horde = maxhorde - current;
+
+                    var minhealth = 25;
+                    var maxhealth = 50 * ((float)mp.Level / (float)MooPlayer.MaxLevel);
+                    if (maxhealth <= 0) maxhealth = 1;
 
                     // span a zombie horde
-                    for(int i=0; i<10; i++)
+                    for (int i=0; i< horde; i++)
                     {
                         var x = rand.Next() % World.Width;
                         var y = rand.Next() % World.Height;
                         float s = (float)(rand.Next() % 10) / 10f + 0.1f;
+                        float h = (float)(rand.Next() % maxhealth) + minhealth;
+                        var large = false;
 
-                        var zombie = new MooZombie(Human) { X = x, Y = y, Speed = s };
+                        if (mp.Level > 10 && rand.Next() % 10 == 0)
+                        {
+                            s = s + s * 1.5f;
+                            h = Constants.MaxHealth;
+                            large = true;
+                        }
+
+                        var zombie = new MooZombie(Human) { X = x, Y = y, Speed = s, Health = h, IsLarge = large };
 
                         World.AddItem(zombie);
                     }
@@ -327,8 +376,8 @@ namespace moo
                 if (mp.XP > mp.XPMax)
                 {
                     mp.Level++;
-                    // keep level progression constant
-                    //mp.XPMax += MooPlayer.XPIncrease;
+                    // make it harder to level up
+                    mp.XPMax += MooPlayer.XPIncrease;
                     mp.XP = 0;
 
                     // ever 3rd level, spawn zombies
@@ -339,5 +388,15 @@ namespace moo
                 }
             }
         }
+
+        #region private
+        private string FailedSoundPath => @"media\failed.wav";
+
+        private bool FailedToCraft()
+        {
+            World.Play(FailedSoundPath);
+            return false;
+        }
+        #endregion
     }
 }

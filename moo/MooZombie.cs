@@ -23,6 +23,10 @@ namespace moo
             Lunch = lunch;
         }
 
+        public const int HordeSize = 10;
+
+        public bool IsLarge { get; set; }
+
         public float Speed
         {
             get { return MovementSpeed; }
@@ -37,7 +41,15 @@ namespace moo
 
         public override void Draw(IGraphics g)
         {
-            g.Ellipse(new RGBA() { R = 0, G = 128, B = 64, A = 200 }, X - (Width / 2), Y - (Height / 2), Width, Height, true);
+            if (IsLarge)
+            {
+                g.Ellipse(new RGBA() { R = 0, G = 128, B = 64, A = 200 }, X - (Width / 4), Y - (Height / 4), Width /4, Height /4, true);
+                g.Ellipse(new RGBA() { R = 0, G = 128, B = 64, A = 200 }, X - (Width / 2), Y - (Height / 2), Width*1.5f, Height*1.5f, true);
+            }
+            else
+            {
+                g.Ellipse(new RGBA() { R = 0, G = 128, B = 64, A = 200 }, X - (Width / 2), Y - (Height / 2), Width, Height, true);
+            }
             base.Draw(g);
         }
 

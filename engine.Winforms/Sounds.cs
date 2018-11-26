@@ -13,6 +13,8 @@ namespace engine.Winforms
     {
         public void Play(string path)
         {
+            if (string.IsNullOrWhiteSpace(path)) return;
+
             SoundPlayer player = null;
             if (!All.TryGetValue(path, out player))
             {

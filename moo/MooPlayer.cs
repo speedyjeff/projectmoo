@@ -29,6 +29,7 @@ namespace moo
 
         public const int XPIncrease = 10;
         public int XPMax { get; set; }
+        public const int MaxLevel = 100;
 
         public override void Draw(IGraphics g)
         {

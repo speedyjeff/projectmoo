@@ -20,7 +20,8 @@ namespace moo
 
         public override string ImagePath => @"media\woodbox.png";
 
-        public const int CraftCost = 10;
+        public const int WoodCraftCost = 10;
+        public const int LevelCraftCost = 1;
 
         public override void Draw(IGraphics g)
         {
