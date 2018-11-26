@@ -62,6 +62,7 @@
     <Compile Include="MooObstacle.cs" />
     <Compile Include="MooRockBox.cs" />
     <Compile Include="MooSword.cs" />
+    <Compile Include="MooTurret.cs" />
     <Compile Include="MooWoodBox.cs" />
     <Compile Include="MooWorld.cs" />
     <Compile Include="MooGold.cs" />

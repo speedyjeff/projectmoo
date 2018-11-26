@@ -208,7 +208,7 @@ namespace moo
 
                     return true;
 
-                case '7':
+                case '5':
                     // craft bow or arrows
 
                     if (mp.Primary is MooBow)
@@ -244,7 +244,7 @@ namespace moo
 
                     return true;
 
-                case '8':
+                case '6':
                     // craft sword
 
                     // check if there is enough wood materials
@@ -267,6 +267,28 @@ namespace moo
 
                     return true;
 
+                case '7':
+                    // craft turret
+
+                    // check if there is enough wood materials
+                    if (mp.Rock < MooTurret.RockCraftCost ||
+                        mp.Wood < MooTurret.WoodCraftCost ||
+                        mp.Food < MooTurret.FoodCraftCost ||
+                        mp.Level < MooTurret.LevelCraftCost) return FailedToCraft();
+
+                    // use wood and rock to craft a turret
+                    mp.Rock -= MooTurret.RockCraftCost;
+                    mp.Wood -= MooTurret.WoodCraftCost;
+                    mp.Food -= MooTurret.FoodCraftCost;
+
+                    // place it directly on the ground here
+                    float x1, y1, x2, y2;
+                    Collision.CalculateLineByAngle(player.X, player.Y, player.Angle, player.Width, out x1, out y1, out x2, out y2);
+                    var turret = new MooTurret() { X = x2, Y = y2 };
+                    World.AddItem(turret);
+
+                    return true;
+
                 case 'r':
                 case 'R':
                     // eat to increase health
@@ -281,7 +303,8 @@ namespace moo
 
                     return true;
 
-                case '9':
+                case 'z':
+                case 'Z':
                     var rand = new Random();
                     var horde = MooZombie.HordeSize + ((MooZombie.HordeSize * MooZombie.HordeSize) * ((float)mp.Level / (float)MooPlayer.MaxLevel));
 
