@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,12 @@ namespace moo
             Width = 40;
             Height = 50;
             Speed = 0.5f;
+            Rand = new Random();
+
+            // establish the brainz sign
+            ShowBrainz = false;
+            BrainzDuration = new Stopwatch();
+            BrainzDuration.Start();
 
             // the player to chase
             Lunch = lunch;
@@ -50,6 +57,15 @@ namespace moo
             {
                 g.Ellipse(new RGBA() { R = 0, G = 128, B = 64, A = 200 }, X - (Width / 2), Y - (Height / 2), Width, Height, true);
             }
+
+            // show brainz sign
+            if (ShowBrainz)
+            {
+                g.Rectangle(RGBA.White, X, Y - (Height / 2), Width*2, (Height / 2), true);
+                g.Ellipse(RGBA.White, X, Y, (Width / 4), (Height / 4), true);
+                g.Text(RGBA.Black, X, Y - (Height / 2), "Brainz...", 14);
+            }
+
             base.Draw(g);
         }
 
@@ -63,6 +79,20 @@ namespace moo
             Collision.CalculateLineByAngle(X, Y, angle, Speed, out x1, out y1, out x2, out y2);
             xdelta = x2 - x1;
             ydelta = y2 - y1;
+
+            // determine if we should show our brainz sign
+            if (ShowBrainz)
+            {
+                if (BrainzDuration.ElapsedMilliseconds > MaxBrainzDuration)
+                {
+                    ShowBrainz = false;
+                }
+            }
+            else if (Rand.Next() % 20 == 0)
+            {
+                ShowBrainz = true;
+                BrainzDuration.Stop();BrainzDuration.Reset();BrainzDuration.Start();
+            }
 
             // always melee
             return ActionEnum.Attack;
@@ -81,6 +111,11 @@ namespace moo
         private MooPlayer Lunch;
         private const int BumpingDamage = 5;
         private float MovementSpeed = 0f;
+        private Random Rand;
+
+        private bool ShowBrainz;
+        private const int MaxBrainzDuration = 2000; // 2 seconds
+        private Stopwatch BrainzDuration;
         #endregion
     }
 }

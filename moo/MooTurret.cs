@@ -64,7 +64,7 @@ namespace moo
             foreach(var elem in elements)
             {
                 if (elem.Id == Id) continue;
-                if (elem is AI)
+                if (elem is AI && !(elem is MooTurret))
                 {
                     var ai = elem as AI;
 
