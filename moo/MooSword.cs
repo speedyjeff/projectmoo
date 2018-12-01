@@ -14,7 +14,7 @@ namespace moo
         public MooSword()
         {
             Name = "MooSword";
-            Damage = 10;
+            Damage = 5;
             Distance = (int)(Width*2);
         }
 

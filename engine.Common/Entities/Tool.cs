@@ -21,7 +21,7 @@ namespace engine.Common.Entities
         public int Distance { get; set; }
         public float Spread { get; protected set; } // degrees
         public int Damage { get; set; }
-        public int Delay { get; protected set; } // ms
+        public int Delay { get; set; } // ms
 
         public virtual string UsedSoundPath() => "media/meele.wav";
     }

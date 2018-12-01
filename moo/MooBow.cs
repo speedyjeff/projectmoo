@@ -23,7 +23,7 @@ namespace moo
             Reload(); // start loaded
 
             // damage
-            Damage = 100;
+            Damage = 75;
             Distance = 600;
             Spread = 0;
             Delay = Constants.GlobalClock * 100;
