@@ -402,7 +402,7 @@ namespace engine.Common
                 elem2.X, elem2.Y, elem2.Width, elem2.Height);
         }
 
-        private Element IntersectingLine(Player player, float x1, float y1, float x2, float y2)
+        private Element LineIntersectingRectangle(Player player, float x1, float y1, float x2, float y2)
         {
             // must ensure to find the closest object that intersects
             Element item = null;
@@ -411,48 +411,25 @@ namespace engine.Common
             // check collisions
             foreach (var elem in Obstacles.Values)
             {
-                bool collision = false;
                 if (elem.Id == player.Id) continue;
                 if (elem.IsDead) continue;
                 if (!elem.IsSolid || elem.CanAcquire) continue;
 
-                // check if these would collide if moved
-                float x3 = elem.X - (elem.Width / 2);
-                float y3 = elem.Y - (elem.Height / 2);
-                float x4 = elem.X + (elem.Width / 2);
-                float y4 = elem.Y + (elem.Height / 2);
-
-                // https://stackoverflow.com/questions/3838329/how-can-i-check-if-two-segments-intersect
-
-                // top
-                collision = Collision.IntersectingLine(x1, y1, x2, y2,
-                    x3, y3, x4, y3);
-                // bottom
-                collision |= Collision.IntersectingLine(x1, y1, x2, y2,
-                    x3, y4, x4, y4);
-                // left
-                collision |= Collision.IntersectingLine(x1, y1, x2, y2,
-                    x3, y3, x3, y4);
-                // left
-                collision |= Collision.IntersectingLine(x1, y1, x2, y2,
-                    x4, y3, x4, y4);
+                // check if the line intersections this objects hit box
+                // after it has moved
+                var collision = Collision.LineIntersectingRectangle(
+                    x1, y1, x2, y2, // line
+                    elem.X, elem.Y, // element
+                    elem.Width, elem.Health);
 
                 if (collision)
                 {
                     // check if this is the closest collision
-                    if (item == null)
+                    var distance = DistanceToObject(player, elem);
+                    if (item == null || distance < prvDistance)
                     {
                         item = elem;
-                        prvDistance = DistanceToObject(player, elem);
-                    }
-                    else
-                    {
-                        var distance = DistanceToObject(player, elem);
-                        if (distance < prvDistance)
-                        {
-                            item = elem;
-                            prvDistance = distance;
-                        }
+                        prvDistance = distance;
                     }
                 }
             }
@@ -466,7 +443,7 @@ namespace engine.Common
             Collision.CalculateLineByAngle(x, y, angle, weapon.Distance, out x1, out y1, out x2, out y2);
 
             // determine damage
-            var elem = IntersectingLine(player, x1, y1, x2, y2);
+            var elem = LineIntersectingRectangle(player, x1, y1, x2, y2);
 
             if (elem != null)
             {

@@ -406,7 +406,7 @@ namespace moo
                     // ever 3rd level, spawn zombies
                     if (mp.Level % 3 == 0)
                     {
-                        TakeAction(mp, '9' /* spawn zombies*/);
+                        TakeAction(mp, 'z' /* spawn zombies*/);
                     }
                 }
             }
