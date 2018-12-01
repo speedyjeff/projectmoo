@@ -62,7 +62,7 @@ namespace moo
                     Height = height,
                     CenterIndicator = false,
                     StartMenu = new MooStartMenu(),
-                    DisableZoom = false,
+                    EnableZoom = true,
                     DisplayStats = true,
                     HUD = new MooHud(players[0] as MooPlayer)
                 }, 
