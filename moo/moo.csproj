@@ -100,16 +100,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\engine.Common\engine.Common.csproj">
-      <Project>{a181b9f7-0422-4805-915e-573e13d07312}</Project>
-      <Name>engine.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\engine.Winforms\engine.Winforms.csproj">
-      <Project>{c031d3fa-2ec9-423a-a04d-3b176c141577}</Project>
-      <Name>engine.Winforms</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="media\axe.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -152,6 +142,16 @@
     <Content Include="media\woodbox.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\engine\engine.Common\engine.Common.csproj">
+      <Project>{a181b9f7-0422-4805-915e-573e13d07312}</Project>
+      <Name>engine.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\engine\engine.Winforms\engine.Winforms.csproj">
+      <Project>{c031d3fa-2ec9-423a-a04d-3b176c141577}</Project>
+      <Name>engine.Winforms</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -20,6 +20,7 @@ namespace moo
             Height = 50;
             Speed = 0.5f;
             Rand = new Random();
+            ShowDefaultDrawing = false;
 
             // establish the brainz sign
             ShowBrainz = false;

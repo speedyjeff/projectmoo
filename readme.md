@@ -9,3 +9,12 @@ The project uses C# and a WinForms shell.  This project has an updated game engi
 ![game play](https://github.com/speedyjeff/projectmoo/blob/master/moo/media/gameplay.png)
 
 ![more game play](https://github.com/speedyjeff/projectmoo/blob/master/moo/media/gameplay2.png)
+
+
+## To Sync
+
+```
+git clone https://github.com/speedyjeff/projectmoo
+git submodule init
+git submodule update
+```
