@@ -71,7 +71,7 @@ namespace moo
                 background
                 );
             generator.World = world;
-            world.OnContact += generator.Contact;
+            world.OnAttack += generator.Contact;
             world.OnBeforeKeyPressed += generator.TakeAction;
             UI = new UIHookup(this, world);
         }
