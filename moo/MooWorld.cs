@@ -160,6 +160,10 @@ namespace moo
 
             switch(key)
             {
+                case Constants.Space:
+                    // no longer able to use the space bar to get resources
+                    return true;
+
                 case '3':
                     // craft wood block
 
