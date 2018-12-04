@@ -18,6 +18,7 @@ namespace moo
             Health = 20;
             Height = 50;
             Width = 50;
+            Color = new RGBA() { R = 127, G = 127, B = 127, A = 200 };
 
             // initialize the gun (a bow)
             Take(new MooBow()
