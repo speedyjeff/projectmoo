@@ -153,7 +153,7 @@ namespace moo
             }
         }
 
-        public bool TakeAction(Player player, char key)
+        public bool TakeAction(Player player, ref char key)
         {
             if (!(player is MooPlayer)) return false;
             var mp = player as MooPlayer;
@@ -410,7 +410,8 @@ namespace moo
                     // ever 3rd level, spawn zombies
                     if (mp.Level % 3 == 0)
                     {
-                        TakeAction(mp, 'z' /* spawn zombies*/);
+                        var action = 'z'; // spawn zombies
+                        TakeAction(mp, ref action);
                     }
                 }
             }
