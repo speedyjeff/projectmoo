@@ -10,7 +10,7 @@ The project uses C# and a WinForms shell.  This project has an updated game engi
 
 ![more game play](https://github.com/speedyjeff/projectmoo/blob/master/moo/media/gameplay2.png)
 
-![game play live](https://github.com/speedyjeff/projectmoo/blob/master/moo/media/gameplay2.gif)
+![game play live](https://github.com/speedyjeff/projectmoo/blob/master/moo/media/gameplay.gif)
 
 
 ## To Sync
