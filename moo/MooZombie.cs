@@ -29,6 +29,9 @@ namespace moo
 
             // the player to chase
             Lunch = lunch;
+
+            // zombie attack
+            Fists = new Tool() { Distance = (int)Width, Damage = 10 };
         }
 
         public const int HordeSize = 10;
@@ -110,7 +113,7 @@ namespace moo
 
         #region private
         private MooPlayer Lunch;
-        private const int BumpingDamage = 5;
+        private const int BumpingDamage = 1;
         private float MovementSpeed = 0f;
         private Random Rand;
 

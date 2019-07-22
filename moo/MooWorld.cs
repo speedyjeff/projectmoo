@@ -314,7 +314,7 @@ namespace moo
 
                     // only add so many zombies
                     var current = World.Alive;
-                    var maxhorde = 300;
+                    var maxhorde = 1000;
 
                     if (current > maxhorde) return true;
                     if (current + horde > maxhorde) horde = maxhorde - current;
