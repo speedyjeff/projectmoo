@@ -109,13 +109,17 @@ namespace moo
             // iterate through the landmarks and return one that this value is part of
             foreach (var l in Landmarks)
             {
-                // TODO respect the circle
-                    // point within a bounding box
-                    if (x > l.Left && x < (l.Left + l.Width) &&
-                        y > l.Top && y < (l.Top + l.Height))
+                // point within a bounding box
+                if (x > l.Left && x < (l.Left + l.Width) &&
+                    y > l.Top && y < (l.Top + l.Height))
+                {
+                    if (l.IsRound)
                     {
-                        return l;
+                        var distance = Collision.DistanceBetweenPoints(l.Left + (l.Width / 2), l.Top + (l.Height / 2), x, y);
+                        if (distance <= (l.Width / 2)) return l;
                     }
+                    else return l;
+                }
             }
 
             return null;
