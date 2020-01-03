@@ -60,7 +60,7 @@ namespace moo
             base.Draw(g);
         }
 
-        public override ActionEnum Action(List<Element> elements, float angleToCenter, bool inZone, ref float xdelta, ref float ydelta, ref float angle)
+        public override ActionEnum Action(List<Element> elements, float angleToCenter, bool inZone, ref float xdelta, ref float ydelta, ref float zdelta, ref float angle)
         {
             // never move
             xdelta = ydelta = 0;
