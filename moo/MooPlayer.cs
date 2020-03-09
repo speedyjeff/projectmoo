@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace moo
             XPMax = 50;
             HandCapacity = 5;
             Secondary = new Element[HandCapacity];
+            Images = new Dictionary<string, IImage>();
 
             Take(new MooAxe());
         }
@@ -41,7 +43,7 @@ namespace moo
             var loaded = 0f;
             if (Primary != null && !string.IsNullOrWhiteSpace(Primary.ImagePath))
             {
-                g.Image(Primary.ImagePath, x2, y2, Primary.Width, Primary.Height);
+                g.Image(GetImage(g, Primary.ImagePath), x2, y2, Primary.Width, Primary.Height);
                 if (Primary is RangeWeapon)
                 {
                     loaded = (Primary as RangeWeapon).PercentReloaded();
@@ -63,5 +65,21 @@ namespace moo
 
             base.Draw(g);
         }
+
+        #region private
+        private Dictionary<string, IImage> Images;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IImage GetImage(IGraphics g, string path)
+        {
+            IImage img = null;
+            if (!Images.TryGetValue(path, out img))
+            {
+                img = g.CreateImage(path);
+                Images.Add(path, img);
+            }
+            return img;
+        }
+        #endregion
     }
 }

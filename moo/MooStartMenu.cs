@@ -18,12 +18,16 @@ namespace moo
 
         public override void Draw(IGraphics g)
         {
+            // init
+            if (KeyboardLayoutImage == null) KeyboardLayoutImage = g.CreateImage(KeyboardLayoutPath);
+            if (MouseLayoutImage == null) MouseLayoutImage = g.CreateImage(MouseLayoutPath);
+
+            // draw
             var width = 650;
             var height = 300;
 
             var left = (g.Width - width) / 2;
             var top = (g.Height - height) / 2;
-
 
             g.DisableTranslation();
             {
@@ -38,8 +42,8 @@ namespace moo
                 top += 20;
                 g.Text(RGBA.Black, left, top, "horde of zombies arrive.");
                 top += 20;
-                g.Image(KeyboardLayoutPath, left, top, 190, 140);
-                g.Image(MouseLayoutPath, left + 230, top, 120, 170);
+                g.Image(KeyboardLayoutImage, left, top, 190, 140);
+                g.Image(MouseLayoutImage, left + 230, top, 120, 170);
                 // crafting menu
                 g.Text(RGBA.Black, left + 250 + 120, top, "Crafting Menu", 16);
                 top += 20;
@@ -65,5 +69,10 @@ namespace moo
 
             base.Draw(g);
         }
+
+        #region private
+        private IImage KeyboardLayoutImage;
+        private IImage MouseLayoutImage;
+        #endregion
     }
 }

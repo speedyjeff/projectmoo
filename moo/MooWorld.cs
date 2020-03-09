@@ -70,7 +70,7 @@ namespace moo
                 int rows = height / chunkSize;
                 var count = cols * rows;
                 var board = new AreaType[count];
-
+                
                 // add a specified number of items
                 int index = 0;
                 // players
@@ -144,10 +144,10 @@ namespace moo
 
                 // make borders
                 var thickness = 15;
-                items.Add( new MooWall(WallDirection.Horiztonal, width, thickness) { X = width / 2, Y = thickness / 2, Z = float.MaxValue } );
-                items.Add( new MooWall(WallDirection.Vertical, height, thickness) { X = thickness/2, Y = height / 2, Z=float.MaxValue } );
-                items.Add( new MooWall(WallDirection.Horiztonal, width, thickness) { X = width / 2, Y = height - thickness/2, Z=float.MaxValue } );
-                items.Add( new MooWall(WallDirection.Vertical, height, thickness) { X = width - thickness/2, Y = height / 2, Z=float.MaxValue } );
+                items.Add( new MooWall(WallDirection.Horiztonal, width, thickness) { X = width / 2, Y = thickness / 2 } );
+                items.Add( new MooWall(WallDirection.Vertical, height, thickness) { X = thickness/2, Y = height / 2 } );
+                items.Add( new MooWall(WallDirection.Horiztonal, width, thickness) { X = width / 2, Y = height - thickness/2 } );
+                items.Add( new MooWall(WallDirection.Vertical, height, thickness) { X = width - thickness/2, Y = height / 2 } );
 
                 return items.ToArray();
             }
@@ -363,7 +363,7 @@ namespace moo
             return false;
         }
 
-        public void Contact(Player player, Element element)
+        public void Contact(Element player, Element element)
         {
             if (player is MooPlayer)
             {

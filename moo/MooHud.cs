@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace moo
         public MooHud(MooPlayer me)
         {
             Me = me;
+            Images = new Dictionary<string, IImage>();
         }
 
         public override void Draw(IGraphics g)
@@ -54,7 +56,7 @@ namespace moo
             if (Me.Primary != null && !string.IsNullOrWhiteSpace(Me.Primary.ImagePath))
             {
                 // put the axe in the first box
-                g.Image(Me.Primary.ImagePath, xbox, ybox, wbox, hbox);
+                g.Image(GetImage(g, Me.Primary.ImagePath), xbox, ybox, wbox, hbox);
                 if (Me.Primary is RangeWeapon) rounds = (Me.Primary as RangeWeapon).Clip;
             }
             g.Rectangle(RGBA.Black, xbox, ybox, wbox, hbox, false);
@@ -65,7 +67,7 @@ namespace moo
                 rounds = -1;
                 if (Me.Secondary[i] != null && !string.IsNullOrWhiteSpace(Me.Secondary[i].ImagePath))
                 {
-                    g.Image(Me.Secondary[i].ImagePath, xbox + (wbox * (i+1)), ybox, wbox, hbox);
+                    g.Image(GetImage(g, Me.Secondary[i].ImagePath), xbox + (wbox * (i+1)), ybox, wbox, hbox);
                     if (Me.Secondary[i] is RangeWeapon) rounds = (Me.Secondary[i] as RangeWeapon).Clip;
                 }
                 g.Rectangle(RGBA.Black, xbox + (wbox * (i+1)), ybox, wbox, hbox, false);
@@ -77,6 +79,19 @@ namespace moo
 
         #region private
         private MooPlayer Me;
+        private Dictionary<string, IImage> Images;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IImage GetImage(IGraphics g, string path)
+        {
+            IImage img = null;
+            if (!Images.TryGetValue(path, out img))
+            {
+                img = g.CreateImage(path);
+                Images.Add(path, img);
+            }
+            return img;
+        }
         #endregion
     }
 }
