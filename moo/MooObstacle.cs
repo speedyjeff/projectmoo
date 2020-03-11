@@ -23,18 +23,13 @@ namespace moo
         private int ImgHeight;
         private int ImgWidth;
 
-        public override string ImagePath => @"media\food.png";
+        public override ImageSource Image => new ImageSource(path: @"media\food.png");
 
         public override void Draw(IGraphics g)
         {
-            if (Image == null) Image = g.CreateImage(ImagePath);
-            g.Image(Image, X - (ImgWidth / 2), Y - (ImgHeight / 2), ImgWidth, ImgHeight);
+            g.Image(Image.Image, X - (ImgWidth / 2), Y - (ImgHeight / 2), ImgWidth, ImgHeight);
 
             base.Draw(g);
         }
-
-        #region private
-        private IImage Image;
-        #endregion
     }
 }

@@ -53,10 +53,10 @@ namespace moo
 
             // display what is in the hand
             var rounds = -1;
-            if (Me.Primary != null && !string.IsNullOrWhiteSpace(Me.Primary.ImagePath))
+            if (Me.Primary != null && Me.Primary.Image != null)
             {
                 // put the axe in the first box
-                g.Image(GetImage(g, Me.Primary.ImagePath), xbox, ybox, wbox, hbox);
+                g.Image(Me.Primary.Image.Image, xbox, ybox, wbox, hbox);
                 if (Me.Primary is RangeWeapon) rounds = (Me.Primary as RangeWeapon).Clip;
             }
             g.Rectangle(RGBA.Black, xbox, ybox, wbox, hbox, false);
@@ -65,9 +65,9 @@ namespace moo
             for (int i = 0; i < Me.HandCapacity; i++)
             {
                 rounds = -1;
-                if (Me.Secondary[i] != null && !string.IsNullOrWhiteSpace(Me.Secondary[i].ImagePath))
+                if (Me.Secondary[i] != null && Me.Secondary[i].Image != null)
                 {
-                    g.Image(GetImage(g, Me.Secondary[i].ImagePath), xbox + (wbox * (i+1)), ybox, wbox, hbox);
+                    g.Image(Me.Secondary[i].Image.Image, xbox + (wbox * (i+1)), ybox, wbox, hbox);
                     if (Me.Secondary[i] is RangeWeapon) rounds = (Me.Secondary[i] as RangeWeapon).Clip;
                 }
                 g.Rectangle(RGBA.Black, xbox + (wbox * (i+1)), ybox, wbox, hbox, false);

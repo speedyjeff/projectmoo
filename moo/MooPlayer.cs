@@ -17,7 +17,6 @@ namespace moo
             XPMax = 50;
             HandCapacity = 5;
             Secondary = new Element[HandCapacity];
-            Images = new Dictionary<string, IImage>();
 
             Take(new MooAxe());
         }
@@ -41,9 +40,9 @@ namespace moo
 
             // draw what is in their hand
             var loaded = 0f;
-            if (Primary != null && !string.IsNullOrWhiteSpace(Primary.ImagePath))
+            if (Primary != null && Primary.Image != null)
             {
-                g.Image(GetImage(g, Primary.ImagePath), x2, y2, Primary.Width, Primary.Height);
+                g.Image(Primary.Image.Image, x2, y2, Primary.Width, Primary.Height);
                 if (Primary is RangeWeapon)
                 {
                     loaded = (Primary as RangeWeapon).PercentReloaded();
@@ -65,21 +64,5 @@ namespace moo
 
             base.Draw(g);
         }
-
-        #region private
-        private Dictionary<string, IImage> Images;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IImage GetImage(IGraphics g, string path)
-        {
-            IImage img = null;
-            if (!Images.TryGetValue(path, out img))
-            {
-                img = g.CreateImage(path);
-                Images.Add(path, img);
-            }
-            return img;
-        }
-        #endregion
     }
 }

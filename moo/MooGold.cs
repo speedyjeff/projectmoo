@@ -16,6 +16,6 @@ namespace moo
             Name = "MooGold";
         }
 
-        public override string ImagePath => @"media\gold.png";
+        public override ImageSource Image => new ImageSource(path: @"media\gold.png");
     }
 }

@@ -18,7 +18,7 @@ namespace moo
             Distance = (int)(Width*2);
         }
 
-        public override string ImagePath => @"media\sword.png";
+        public override ImageSource Image => new ImageSource(path: @"media\sword.png");
 
         public const int WoodCraftCost = 100;
         public const int RockCraftCost = 150;

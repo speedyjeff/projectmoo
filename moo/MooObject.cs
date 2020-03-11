@@ -21,15 +21,10 @@ namespace moo
         {
             if (CanAcquire)
             {
-                if (Image == null) Image = g.CreateImage(ImagePath);
-                g.Image(Image, X, Y, Width, Height);
+                g.Image(Image.Image, X, Y, Width, Height);
             }
 
             base.Draw(g);
         }
-
-        #region private
-        private IImage Image;
-        #endregion
     }
 }

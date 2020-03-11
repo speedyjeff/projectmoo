@@ -18,6 +18,6 @@ namespace moo
             Distance = (int)(Width);
         }
 
-        public override string ImagePath => @"media\axe.png";
+        public override ImageSource Image => new ImageSource(path: @"media\axe.png");
     }
 }

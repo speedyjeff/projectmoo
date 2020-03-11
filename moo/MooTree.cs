@@ -18,6 +18,6 @@ namespace moo
 
         public const float Gathered = 1;
 
-        public override string ImagePath => @"media\tree.png";
+        public override ImageSource Image => new ImageSource(path: @"media\tree.png");
     }
 }

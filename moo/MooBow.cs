@@ -32,7 +32,7 @@ namespace moo
         public override string EmptySoundPath() => @"media\emptybow.wav";
         public override string FiredSoundPath() => @"media\bow.wav";
         public override string ReloadSoundPath() => "";
-        public override string ImagePath => @"media\bow.png";
+        public override ImageSource Image => new ImageSource(path: @"media\bow.png");
 
         public const int WoodCraftCost = 40;
         public const int RockCraftCost = 10;
