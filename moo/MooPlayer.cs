@@ -44,9 +44,9 @@ namespace moo
             if (Primary != null && Primary.Image != null)
             {
                 g.Image(Primary.Image.Image, x2, y2, Primary.Width, Primary.Height);
-                if (Primary is RangeWeapon)
+                if (Primary is RangeWeapon gun)
                 {
-                    loaded = (Primary as RangeWeapon).PercentReloaded();
+                    loaded = gun.PercentReloaded();
                 }
             }
 

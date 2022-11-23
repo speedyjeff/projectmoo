@@ -80,11 +80,11 @@ namespace moo
                 // gold
                 for (int i=0; i<(count * 0.01); i++) board[index++] = AreaType.Gold;
                 // Tree
-                for (int i = 0; i < (count * 0.05); i++) board[index++] = AreaType.Tree;
+                for (int i = 0; i < (count * 0.15); i++) board[index++] = AreaType.Tree;
                 // rock
-                for (int i = 0; i < (count * 0.02); i++) board[index++] = AreaType.Rock;
+                for (int i = 0; i < (count * 0.1); i++) board[index++] = AreaType.Rock;
                 // food
-                for (int i = 0; i < (count * 0.01); i++) board[index++] = AreaType.Food;
+                for (int i = 0; i < (count * 0.05); i++) board[index++] = AreaType.Food;
 
                 // randomize
                 for (int id1 = 0; id1 < index; id1++)

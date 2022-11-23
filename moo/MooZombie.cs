@@ -73,17 +73,8 @@ namespace moo
             base.Draw(g);
         }
 
-        public override ActionEnum Action(List<Element> elements, float angleToCenter, bool inZone, ref float xdelta, ref float ydelta, ref float zdelta, ref float angle)
+        public override void Update()
         {
-            // calculate the direction towards 'Lunch'
-            angle = Collision.CalculateAngleFromPoint(X, Y, Lunch.X, Lunch.Y);
-
-            // move towards 'Lunch'
-            float x1, y1, x2, y2;
-            Collision.CalculateLineByAngle(X, Y, angle, Speed, out x1, out y1, out x2, out y2);
-            xdelta = x2 - x1;
-            ydelta = y2 - y1;
-
             // determine if we should show our brainz sign
             if (ShowBrainz)
             {
@@ -95,8 +86,20 @@ namespace moo
             else if (Rand.Next() % 20 == 0)
             {
                 ShowBrainz = true;
-                BrainzDuration.Stop();BrainzDuration.Reset();BrainzDuration.Start();
+                BrainzDuration.Stop(); BrainzDuration.Reset(); BrainzDuration.Start();
             }
+        }
+
+        public override ActionEnum Action(List<Element> elements, float angleToCenter, bool inZone, ref float xdelta, ref float ydelta, ref float zdelta, ref float angle)
+        {
+            // calculate the direction towards 'Lunch'
+            angle = Collision.CalculateAngleFromPoint(X, Y, Lunch.X, Lunch.Y);
+
+            // move towards 'Lunch'
+            float x1, y1, x2, y2;
+            Collision.CalculateLineByAngle(X, Y, angle, Speed, out x1, out y1, out x2, out y2);
+            xdelta = x2 - x1;
+            ydelta = y2 - y1;
 
             // always melee
             return ActionEnum.Attack;

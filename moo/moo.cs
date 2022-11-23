@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// add items to the screen that are craftable
+
 namespace moo
 {
     public partial class moo : Form
@@ -45,6 +47,7 @@ namespace moo
             var obstacles = generator.GetObstacles(out width, out height);
 
             var background = new MooBackground(width, height) { GroundColor = new RGBA { R = 100, G = 255, B = 100, A = 255 } };
+            var hud = new MooHud(players[0] as MooPlayer);
             var world = new World(new WorldConfiguration()
             {
                 Width = width,
@@ -53,7 +56,7 @@ namespace moo
                 StartMenu = new MooStartMenu(),
                 EnableZoom = true,
                 DisplayStats = true,
-                HUD = new MooHud(players[0] as MooPlayer)
+                HUD = hud
             },
                 players,
                 obstacles,
@@ -62,6 +65,7 @@ namespace moo
             generator.World = world;
             world.OnAttack += generator.Contact;
             world.OnBeforeKeyPressed += generator.TakeAction;
+            world.OnBeforeAction += hud.ReceivePlayerView;
             UI = new UIHookup(this, world);
         }
 
