@@ -13,8 +13,6 @@ namespace moo
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        private UIHookup UI;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -36,52 +34,8 @@ namespace moo
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // moo
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1500, 800);
-            this.Name = "moo";
-            this.Text = "moo";
-            this.ResumeLayout(false);
-            this.DoubleBuffered = true;
-
-            var generator = new MooWorld();
-
-            int width = 0;
-            int height = 0;
-            var players = generator.GetPlayers();
-            var obstacles = generator.GetObstacles(out width, out height);
-
-            var background = new MooBackground(width, height) { GroundColor = new RGBA { R = 100, G = 255, B = 100, A = 255 } };
-            var world = new World(new WorldConfiguration()
-                {
-                    Width = width,
-                    Height = height,
-                    CenterIndicator = false,
-                    StartMenu = new MooStartMenu(),
-                    EnableZoom = true,
-                    DisplayStats = true,
-                    HUD = new MooHud(players[0] as MooPlayer)
-                }, 
-                players, 
-                obstacles,
-                background
-                );
-            generator.World = world;
-            world.OnAttack += generator.Contact;
-            world.OnBeforeKeyPressed += generator.TakeAction;
-            UI = new UIHookup(this, world);
+            
         }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            UI.ProcessCmdKey(keyData);
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
         #endregion
     }
 }

@@ -21,10 +21,10 @@ namespace moo
             Color = new RGBA() { R = 127, G = 127, B = 127, A = 200 };
 
             // initialize the gun (a bow)
-            Take(new MooBow()
+            Primary = new MooBow()
             {
                 Delay = Constants.GlobalClock * 20
-            });
+            };
         }
 
         public const int WoodCraftCost = 100;

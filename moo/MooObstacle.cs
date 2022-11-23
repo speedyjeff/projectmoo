@@ -23,7 +23,7 @@ namespace moo
         private int ImgHeight;
         private int ImgWidth;
 
-        public override ImageSource Image => new ImageSource(path: @"media\food.png");
+        public override ImageSource Image => new ImageSource("food", moo.Images["food"]);
 
         public override void Draw(IGraphics g)
         {

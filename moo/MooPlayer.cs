@@ -18,7 +18,8 @@ namespace moo
             HandCapacity = 5;
             Secondary = new Element[HandCapacity];
 
-            Take(new MooAxe());
+            // default to holding an axe
+            Primary = new MooAxe();
         }
 
         public float Wood { get; set; }

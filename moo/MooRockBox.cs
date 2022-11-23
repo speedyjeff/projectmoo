@@ -18,7 +18,7 @@ namespace moo
             Health = 15;
         }
 
-        public override ImageSource Image => new ImageSource(path: @"media\rockbox.png");
+        public override ImageSource Image => new ImageSource("rockbox", moo.Images["rockbox"]);
 
         public const int RockCraftCost = 10;
         public const int LeelCraftCost = 5;

@@ -19,6 +19,6 @@ namespace moo
         public const int HealthPerFood = 1;
         public const float Gathered = 1;
 
-        public override ImageSource Image => new ImageSource(path: @"media\food.png");
+        public override ImageSource Image => new ImageSource("food", moo.Images["food"]);
     }
 }

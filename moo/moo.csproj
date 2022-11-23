@@ -1,159 +1,50 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{88433EC0-62BB-4170-A1B9-CB9F4B2C7BCF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>moo</RootNamespace>
-    <AssemblyName>moo</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <None Remove="media\axe.png" />
+    <None Remove="media\bow.png" />
+    <None Remove="media\bow.wav" />
+    <None Remove="media\emptybow.wav" />
+    <None Remove="media\failed.wav" />
+    <None Remove="media\food.png" />
+    <None Remove="media\gold.png" />
+    <None Remove="media\keyboard.png" />
+    <None Remove="media\mouse.png" />
+    <None Remove="media\rock.png" />
+    <None Remove="media\rockbox.png" />
+    <None Remove="media\sword.png" />
+    <None Remove="media\tree.png" />
+    <None Remove="media\woodbox.png" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="moo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="moo.Designer.cs">
-      <DependentUpon>moo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Main.cs" />
-    <Compile Include="MooAxe.cs" />
-    <Compile Include="MooBackground.cs" />
-    <Compile Include="MooBow.cs" />
-    <Compile Include="MooCraftable.cs" />
-    <Compile Include="MooFood.cs" />
-    <Compile Include="MooObject.cs" />
-    <Compile Include="MooObstacle.cs" />
-    <Compile Include="MooRockBox.cs" />
-    <Compile Include="MooSword.cs" />
-    <Compile Include="MooTurret.cs" />
-    <Compile Include="MooWoodBox.cs" />
-    <Compile Include="MooWorld.cs" />
-    <Compile Include="MooGold.cs" />
-    <Compile Include="MooHud.cs" />
-    <Compile Include="MooPlayer.cs" />
-    <Compile Include="MooRock.cs" />
-    <Compile Include="MooTree.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MooWall.cs" />
-    <Compile Include="MooStartMenu.cs" />
-    <Compile Include="MooZombie.cs" />
-    <EmbeddedResource Include="moo.resx">
-      <DependentUpon>moo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <EmbeddedResource Include="media\axe.png" />
+    <EmbeddedResource Include="media\bow.png" />
+    <EmbeddedResource Include="media\bow.wav" />
+    <EmbeddedResource Include="media\emptybow.wav" />
+    <EmbeddedResource Include="media\failed.wav" />
+    <EmbeddedResource Include="media\food.png" />
+    <EmbeddedResource Include="media\gold.png" />
+    <EmbeddedResource Include="media\keyboard.png" />
+    <EmbeddedResource Include="media\mouse.png" />
+    <EmbeddedResource Include="media\rock.png" />
+    <EmbeddedResource Include="media\rockbox.png" />
+    <EmbeddedResource Include="media\sword.png" />
+    <EmbeddedResource Include="media\tree.png" />
+    <EmbeddedResource Include="media\woodbox.png" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\engine\engine.Common\engine.Common.csproj" />
+    <ProjectReference Include="..\engine\engine.Winforms\engine.Winforms.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="media\axe.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\bow.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\bow.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\emptybow.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\failed.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\food.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\gold.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\keyboard.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\mouse.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\rock.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\rockbox.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\sword.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\tree.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="media\woodbox.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\engine\engine.Common\engine.Common.csproj">
-      <Project>{a181b9f7-0422-4805-915e-573e13d07312}</Project>
-      <Name>engine.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\engine\engine.Winforms\engine.Winforms.csproj">
-      <Project>{c031d3fa-2ec9-423a-a04d-3b176c141577}</Project>
-      <Name>engine.Winforms</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

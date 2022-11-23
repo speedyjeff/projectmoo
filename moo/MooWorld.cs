@@ -155,13 +155,13 @@ namespace moo
 
         public bool TakeAction(Player player, ref char key)
         {
-            if (!(player is MooPlayer)) return false;
-            var mp = player as MooPlayer;
+            if (!(player is MooPlayer mp)) return false;
 
             switch(key)
             {
                 case Constants.Space:
-                    // no longer able to use the space bar to get resources
+                case Constants.Space2:
+                    // not able to use the space bar to get resources
                     return true;
 
                 case '3':
@@ -174,17 +174,14 @@ namespace moo
                     // use wood to craft a box
                     mp.Wood -= MooWoodBox.WoodCraftCost;
 
-                    // if there is room in the hand (put in hand)
-                    //  else drop on the ground
+                    // craft it on the ground
                     var wood = new MooWoodBox() { X = player.X, Y = player.Y };
                     // the health of this box increases with level
                     if (mp.Level > MooPlayer.MaxLevel) wood.Health += wood.Health;
                     else wood.Health += wood.Health * ((float)mp.Level / (float)MooPlayer.MaxLevel);
 
-                    if (!player.Take(wood))
-                    {
-                        World.AddItem(wood);
-                    }
+                    // add the item to the world
+                    World.AddItem(wood);
 
                     return true;
 
@@ -198,17 +195,14 @@ namespace moo
                     // use rock to craft a box
                     mp.Rock -= MooRockBox.RockCraftCost;
 
-                    // if there is room in the hand (put in hand)
-                    //  else drop on the ground
+                    // craft it on the ground
                     var rock = new MooRockBox() { X = player.X, Y = player.Y };
                     // the health of this box increases with level
                     if (mp.Level > MooPlayer.MaxLevel) rock.Health *= rock.Health;
                     else rock.Health *= rock.Health * ((float)mp.Level / (float)MooPlayer.MaxLevel);
 
-                    if (!player.Take(rock))
-                    {
-                        World.AddItem(rock);
-                    }
+                    // add it to the world
+                    World.AddItem(rock);
 
                     return true;
 
@@ -237,14 +231,11 @@ namespace moo
                     mp.Rock -= MooBow.RockCraftCost;
                     mp.Wood -= MooBow.WoodCraftCost;
 
-                    // if there is room in the hand (put in hand)
-                    //  else drop on the ground
+                    // craft it on the ground
                     var bow = new MooBow() { X = player.X, Y = player.Y };
 
-                    if (!player.Take(bow))
-                    {
-                        World.AddItem(bow);
-                    }
+                    // add item to the world
+                    World.AddItem(bow);
 
                     return true;
 
@@ -260,14 +251,11 @@ namespace moo
                     mp.Rock -= MooSword.RockCraftCost;
                     mp.Wood -= MooSword.WoodCraftCost;
 
-                    // if there is room in the hand (put in hand)
-                    //  else drop on the ground
+                    // craft it on the ground
                     var sword = new MooSword() { X = player.X, Y = player.Y };
 
-                    if (!player.Take(sword))
-                    {
-                        World.AddItem(sword);
-                    }
+                    // add it to the world
+                    World.AddItem(sword);
 
                     return true;
 
@@ -347,13 +335,10 @@ namespace moo
                     return true;
 
                 case Constants.LeftMouse:
-                    // place the block
+                    // place the block or attack
                     if (mp.Primary != null && mp.Primary is MooCraftable)
                     {
-                        var item = mp.DropPrimary() as MooCraftable;
-                        item.Place(mp);
-                        World.AddItem(item);
-
+                        World.KeyPress((char)Constants.Place);
                         return true;
                     }
 
@@ -418,7 +403,7 @@ namespace moo
         }
 
         #region private
-        private string FailedSoundPath => @"media\failed.wav";
+        private string FailedSoundPath => "failed";
 
         private bool FailedToCraft()
         {

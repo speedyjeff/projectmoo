@@ -29,10 +29,10 @@ namespace moo
             Delay = Constants.GlobalClock * 100;
         }
 
-        public override string EmptySoundPath() => @"media\emptybow.wav";
-        public override string FiredSoundPath() => @"media\bow.wav";
+        public override string EmptySoundPath() => "emptybow";
+        public override string FiredSoundPath() => "bow";
         public override string ReloadSoundPath() => "";
-        public override ImageSource Image => new ImageSource(path: @"media\bow.png");
+        public override ImageSource Image => new ImageSource("bow", moo.Images["bow"]);
 
         public const int WoodCraftCost = 40;
         public const int RockCraftCost = 10;

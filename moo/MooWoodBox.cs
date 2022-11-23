@@ -18,7 +18,7 @@ namespace moo
             Health = 5;
         }
 
-        public override ImageSource Image => new ImageSource(path: @"media\woodbox.png");
+        public override ImageSource Image => new ImageSource("woodbox", moo.Images["woodbox"]);
 
         public const int WoodCraftCost = 10;
         public const int LevelCraftCost = 1;
