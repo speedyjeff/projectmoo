@@ -52,10 +52,8 @@ namespace moo
             {
                 Width = width,
                 Height = height,
-                CenterIndicator = false,
                 StartMenu = new MooStartMenu(),
                 EnableZoom = true,
-                DisplayStats = true,
                 HUD = hud
             },
                 players,
